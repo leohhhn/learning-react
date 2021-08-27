@@ -1,53 +1,84 @@
-import {useRef} from 'react';
+import {useState} from 'react';
 
 import Card from "../ui/Card.js";
 import classes from "./NewMeetupForm.module.css";
 
 function NewMeetupForm(props) {
-    const titleInputRef = useRef();
-    const imageInputRef = useRef();
-    const addressInputRef = useRef();
-    const descriptionInputRef = useRef();
+    const [values, setValues] = useState({
+        title: '',
+        url: '',
+        address: '',
+        description: ''
+    });
 
-    function submitHandler(event) {
-        event.preventDefault();
+    const [submitted, setSubmitted] = useState(false);
 
-        const enteredTitle = titleInputRef.current.value;
-        const enteredImage = imageInputRef.current.value;
-        const enteredAddress = addressInputRef.current.value;
-        const enteredDescription = descriptionInputRef.current.value;
+    const handleTitleChange = (evt) => {
+        setValues({...values, title: evt.target.value});
+    }
+    const handleUrlChange = (evt) => {
+        setValues({...values, url: evt.target.value});
+    }
+    const handleAddressChange = (evt) => {
+        setValues({...values, address: evt.target.value});
+    }
+    const handleDescriptionChange = (evt) => {
+        setValues({...values, description: evt.target.value});
+    }
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        // todo sta ako ocu jos jedan da dodam? mozda dodati neki timeout za ovaj state da se resetuje posle
+        setSubmitted(true);
+        props.onAddMeetup(values);
+        console.log(values);
 
-        const meetupData = {
-            title: enteredTitle,
-            image: enteredImage,
-            address: enteredAddress,
-            description: enteredDescription
-        }
-        console.log(meetupData)
+        setValues({
+            title: '',
+            url: '',
+            address: '',
+            description: ''
+        });
     }
 
     return (
         <Card>
-            <form className={classes.form} onSubmit={submitHandler}>
+            <form className={classes.form} onSubmit={handleSubmit}>
                 <div className={classes.control}>
-                    <label htmlFor="titleInput" ref={titleInputRef}>Meetup title:</label>
-                    <input type="text" required id="titleInput"/>
+                    <label htmlFor="titleInput">Meetup title:</label>
+                    <input
+                        type="text"
+                        value={values.title}
+                        onChange={handleTitleChange}
+                        required id="titleInput"/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor="urlInput" ref={imageInputRef}>Meetup image url:</label>
-                    <input type="text" required id="urlInput"/>
+                    <label htmlFor="urlInput">Meetup image url:</label>
+                    <input
+                        type="text"
+                        value={values.url}
+                        onChange={handleUrlChange}
+                        required id="urlInput"/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor="addressInput" ref={addressInputRef}>Address:</label>
-                    <input type="text" required id="addressInput"/>
+                    <label htmlFor="addressInput">Address:</label>
+                    <input
+                        type="text"
+                        value={values.address}
+                        onChange={handleAddressChange}
+                        required id="addressInput"/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor="descriptionInput" ref={descriptionInputRef}>Description:</label>
-                    <textarea id="description" required rows="5"/>
+                    <label htmlFor="descriptionInput">Description:</label>
+                    <textarea
+                        id="description"
+                        value={values.description}
+                        onChange={handleDescriptionChange}
+                        required rows="5"/>
                 </div>
                 <div className={classes.actions}>
                     <button>Add Meetup</button>
                 </div>
+                {submitted ? <p>New Meetup successfully created! Nice.</p> : null}
             </form>
         </Card>
     );
