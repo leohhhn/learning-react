@@ -1,13 +1,25 @@
 import {Link} from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
+import {useContext} from "react";
+import Web3Context from "../../store/web3-context";
 
-function MainNavigation(props){
+
+function MainNavigation(props) {
+    //
+    // let Web3Ctx = useContext(Web3Context);
+    // let currentAccount = Web3Ctx.currentAccount;
+
+
     return (
-       <header className={classes.header}>
-           <div className={classes.logo}>React Meetups</div>
+        <header className={classes.header}>
+            <div className={classes.logo}>React Meetups</div>
             <nav>
                 <ul>
+                    {/*<li>*/}
+                    {/*    <button*/}
+                    {/*        onClick={connectMetamaskHandler}>{Web3Ctx.isMetaMaskConnected ? currentAccount : 'Connect MetaMask'}</button>*/}
+                    {/*</li>*/}
                     <li>
                         <Link to='/'>All Meetups</Link>
                     </li>
@@ -19,7 +31,7 @@ function MainNavigation(props){
                     </li>
                 </ul>
             </nav>
-       </header>
+        </header>
     );
 }
 

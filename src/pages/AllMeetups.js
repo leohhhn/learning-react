@@ -8,20 +8,20 @@ function AllMeetupsPage(props) {
     const [loadedMeetups, setLoadedMeetups] = useState([]);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(apiURL).then(response => {
             return response.json();
         }).then(data => {
             const meetups = [];
-            for (const key in data){
+            for (const key in data) {
                 const meetup = {
                     id: key,
                     ...data[key]
                 };
                 meetups.push(meetup);
             }
-
-            setIsLoading(false);
             setLoadedMeetups(meetups);
+            setIsLoading(false);
         });
     }, []);
 

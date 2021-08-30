@@ -14,7 +14,6 @@ function NewMeetupPage(props) {
                 }
             }
         );
-
     }
 
     return (
@@ -22,7 +21,6 @@ function NewMeetupPage(props) {
             <h1>Add a new Meetup</h1>
             <NewMeetupForm onAddMeetup={addMeetupHandler}/>
         </section>
-
     );
 }
 

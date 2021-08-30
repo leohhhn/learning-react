@@ -5,10 +5,10 @@ import classes from "./NewMeetupForm.module.css";
 
 function NewMeetupForm(props) {
     const [values, setValues] = useState({
-        title: '',
-        url: '',
-        address: '',
-        description: ''
+        title: 'Meetup in Belgrade',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
+        address: 'Milice Carice 2',
+        description: 'lMAO Very cool event you should come'
     });
 
     const [submitted, setSubmitted] = useState(false);
@@ -27,10 +27,8 @@ function NewMeetupForm(props) {
     }
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // todo sta ako ocu jos jedan da dodam? mozda dodati neki timeout za ovaj state da se resetuje posle
         setSubmitted(true);
         props.onAddMeetup(values);
-        console.log(values);
 
         setValues({
             title: '',
