@@ -7,19 +7,21 @@ import Web3Context from "../../store/web3-context";
 
 function MainNavigation(props) {
     //
-    // let Web3Ctx = useContext(Web3Context);
-    // let currentAccount = Web3Ctx.currentAccount;
+    let Web3Ctx = useContext(Web3Context);
 
+    function connectMetamaskHandler() {
+        Web3Ctx.connectMetaMask();
+    }
 
     return (
         <header className={classes.header}>
             <div className={classes.logo}>React Meetups</div>
             <nav>
                 <ul>
-                    {/*<li>*/}
-                    {/*    <button*/}
-                    {/*        onClick={connectMetamaskHandler}>{Web3Ctx.isMetaMaskConnected ? currentAccount : 'Connect MetaMask'}</button>*/}
-                    {/*</li>*/}
+                    <li>
+                        <button
+                            onClick={connectMetamaskHandler}>{Web3Ctx.isMetaMaskConnected ? 'Connected!' : 'Connect MetaMask'}</button>
+                    </li>
                     <li>
                         <Link to='/'>All Meetups</Link>
                     </li>

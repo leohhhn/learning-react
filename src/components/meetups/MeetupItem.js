@@ -20,7 +20,6 @@ function MeetupItem(props) {
                 address: props.address
             });
         }
-
     }
 
     return (
@@ -33,6 +32,7 @@ function MeetupItem(props) {
                     <h3>{props.title}</h3>
                     <address>{props.address}</address>
                     <p>{props.description}</p>
+                    <p>Owner of event: {props.owner}</p>
                 </div>
                 <div className={classes.actions}>
                     <button

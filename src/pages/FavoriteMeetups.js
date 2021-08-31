@@ -9,7 +9,8 @@ function FavoritesPage(props) {
     let content = favoritesCtx.totalFavorites === 0 ? 'No favorites yet!' :
         <MeetupList meetups={favoritesCtx.favorites}/>;
 
-    return <section><h1>My Favorites</h1>
+    return <section>
+        <h1>My Favorites</h1>
         {content}
     </section>
 }

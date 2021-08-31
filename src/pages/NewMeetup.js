@@ -5,6 +5,7 @@ const apiURL = 'https://react-testing-4bc3a-default-rtdb.europe-west1.firebaseda
 function NewMeetupPage(props) {
 
     async function addMeetupHandler(meetupData) {
+        //console.log(meetupData)
         await fetch(apiURL,
             {
                 method: 'POST',

@@ -5,9 +5,9 @@ import Web3 from 'web3';
 const Web3Context = createContext({
     isMetaMaskConnected: false,
     currentAccount: null,
-    connectMetaMaskHandler: () => {}
+    connectMetaMask: () => {
+    }
 });
-
 
 export function Web3ContextProvider(props) {
 
@@ -15,10 +15,9 @@ export function Web3ContextProvider(props) {
     const [connectedMM, setConnectedMM] = useState(false);
     const [currentUserAccount, setCurrentUserAccount] = useState(null);
 
-    // window.eth.on('accountsChanged', function (accounts) {
-    //     setCurrentUserAccount(accounts[0]);
-    //     // todo check da li ovo treba ovde, vrv ne
-    // });
+    window.ethereum.on('accountsChanged', function (accounts) {
+        setCurrentUserAccount(accounts[0]);
+    });
 
     async function connectMetaMaskHandler() {
         if (typeof window.ethereum !== 'undefined') {
