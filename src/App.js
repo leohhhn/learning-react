@@ -10,18 +10,18 @@ function App() {
     return (
         <Layout>
             <Switch>
-                <Route>
+                <Route Route path='/vault' >
                     <SecretVault/>
                 </Route>
-                {/*<Route path='/' exact>*/}
-                {/*    <AllMeetupsPage/>*/}
-                {/*</Route>*/}
-                {/*<Route path='/favorites'>*/}
-                {/*    <FavoritesPage/>*/}
-                {/*</Route>*/}
-                {/*<Route path='/new-meetup'>*/}
-                {/*    <NewMeetupPage/>*/}
-                {/*</Route>*/}
+                <Route path='/' exact>
+                    <AllMeetupsPage/>
+                </Route>
+                <Route path='/favorites'>
+                    <FavoritesPage/>
+                </Route>
+                <Route path='/new-meetup'>
+                    <NewMeetupPage/>
+                </Route>
             </Switch>
         </Layout>
     );
