@@ -19,7 +19,6 @@ function NewMeetupForm(props) {
 
     const [submitted, setSubmitted] = useState(false);
 
-
     const handleTitleChange = (evt) => {
         setValues({...values, title: evt.target.value});
     }

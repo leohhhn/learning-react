@@ -4,9 +4,8 @@ import classes from './MainNavigation.module.css';
 import {useContext} from "react";
 import Web3Context from "../../store/web3-context";
 
-
 function MainNavigation(props) {
-    //
+
     let Web3Ctx = useContext(Web3Context);
 
     function connectMetamaskHandler() {
