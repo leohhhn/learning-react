@@ -1,14 +1,15 @@
 import Card from "../components/ui/Card";
 import classes from "../components/meetups/NewMeetupForm.module.css";
+import startZK from "../components/zok";
 
 function SecretVault(props) {
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        startZK();
+
     }
-
-
 
     return (
         <Card>
@@ -20,13 +21,11 @@ function SecretVault(props) {
                         required id="titleInput"
                         placeholder="X coordinate"
                     />
-
                     <input
                         type="password"
                         required id="titleInput"
                         placeholder="Y coordinate"
                     />
-
                 </div>
                 <div className={classes.control}>
                     <label>Key 2:</label>
@@ -35,7 +34,6 @@ function SecretVault(props) {
                         required id="titleInput"
                         placeholder="X coordinate"
                     />
-
                     <input
                         type="password"
                         required id="titleInput"
@@ -49,7 +47,6 @@ function SecretVault(props) {
                         required id="titleInput"
                         placeholder="X coordinate"
                     />
-
                     <input
                         type="password"
                         required id="titleInput"
@@ -73,7 +70,7 @@ function SecretVault(props) {
                     <button>Unlock Vault</button>
                 </div>
             </form>
-    </Card>);
+        </Card>);
 }
 
 export default SecretVault;
