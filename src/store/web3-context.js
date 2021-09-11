@@ -1,6 +1,4 @@
 import {createContext, useState} from "react";
-import Web3 from 'web3';
-
 
 const Web3Context = createContext({
     isMetaMaskConnected: false,

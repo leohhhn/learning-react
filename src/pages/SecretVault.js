@@ -1,6 +1,6 @@
 import Card from "../components/ui/Card";
 import classes from "../components/meetups/NewMeetupForm.module.css";
-import startZK from "../components/zok";
+import startZK from "../components/zkp/zok";
 
 function SecretVault(props) {
 
