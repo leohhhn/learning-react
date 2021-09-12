@@ -1,10 +1,13 @@
-def main(private field x1, private field y1, private field x2, private field y2, private field x3, private field y3, private field x0, private field y0, field s) -> bool:
+import "hashes/sha256/512bitPacked" as sha256packed
 
-       field
-      field f_0 = y0 * ((x1 / (x1 - x0)) * (x2 / (x2 - x0)) * (x3 / (x3 - x0))) +\
-                  y1 * ((x0 / (x0 - x1)) * (x2 / (x2 - x1)) * (x3 / (x3 - x1))) +\
-                  y2 * ((x1 / (x1 - x2)) * (x0 / (x0 - x2)) * (x3 / (x3 - x2))) +\
-                  y3 * ((x1 / (x1 - x3)) * (x2 / (x2 - x3)) * (x0 / (x0 - x3)))
-        return f_0 == s
+def main(private field x0, private field y0, private field x1, private field y1, private field x2, private field y2, private field x3, private field y3) -> bool:
 
+    field f_0 = y0 * ((x1 / (x1 - x0)) * (x2 / (x2 - x0)) * (x3 / (x3 - x0))) +\
+                y1 * ((x0 / (x0 - x1)) * (x2 / (x2 - x1)) * (x3 / (x3 - x1))) +\
+                y2 * ((x1 / (x1 - x2)) * (x0 / (x0 - x2)) * (x3 / (x3 - x2))) +\
+                y3 * ((x1 / (x1 - x3)) * (x2 / (x2 - x3)) * (x0 / (x0 - x3)))
+                  
+    field[2] t = sha256packed([0, 0, 0, f_0])
+        
+    return (t[0] == 82813544787644065989771223340885025079 && t[1] == 180796112148717072687895248956071692603)
 

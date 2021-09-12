@@ -32,7 +32,6 @@ function NewMeetupForm(props) {
         setValues({...values, description: evt.target.value});
     }
 
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
         setSubmitted(true);
