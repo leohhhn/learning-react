@@ -13,18 +13,16 @@ function SecretVault() {
         x2: "",
         y2: "",
         x3: "",
-        y3: "",
+        y3: ""
     });
 
     const [vaultLoading, setVaultLoading] = useState(true);
 
     useEffect(() => {
         setVaultLoading(true);
-        initializeZokratesProvider().then(
-            // todo fix loading only once
+        initializeZokratesProvider().then(() => {
             setVaultLoading(false)
-        );
-
+        });
     }, []);
 
 
@@ -38,8 +36,19 @@ function SecretVault() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(inputs)
-        // todo get inputs and forward them to Zokrates
+
+        const t = {
+            x0: "1",
+            y0: "1028377",
+            x1: "2",
+            y1: "1028592",
+            x2: "3",
+            y2: "1029155",
+            x3: "4",
+            y3: "1030234"
+        }
+
+        unlockVault(Object.values(t));
 
     }
 
@@ -56,12 +65,14 @@ function SecretVault() {
                 <div className={classes.control}>
                     <label>Key 1:</label>
                     <input
+                        name={"x0"}
                         type="password"
                         placeholder="X coordinate"
                         value={inputs.x0}
                         onChange={handleChange}
                     />
                     <input
+                        name={"y0"}
                         type="password"
                         placeholder="Y coordinate"
                         value={inputs.y0}
@@ -71,12 +82,14 @@ function SecretVault() {
                 <div className={classes.control}>
                     <label>Key 2:</label>
                     <input
+                        name={"x1"}
                         type="password"
                         placeholder="X coordinate"
                         value={inputs.x1}
                         onChange={handleChange}
                     />
                     <input
+                        name={"y1"}
                         type="password"
                         placeholder="Y coordinate"
                         value={inputs.y1}
@@ -86,12 +99,14 @@ function SecretVault() {
                 <div className={classes.control}>
                     <label>Key 3:</label>
                     <input
+                        name={"x2"}
                         type="password"
                         placeholder="X coordinate"
                         value={inputs.x2}
                         onChange={handleChange}
                     />
                     <input
+                        name={"y2"}
                         type="password"
                         placeholder="Y coordinate"
                         value={inputs.y2}
@@ -101,12 +116,14 @@ function SecretVault() {
                 <div className={classes.control}>
                     <label>Key 4:</label>
                     <input
+                        name={"x3"}
                         type="password"
                         placeholder="X coordinate"
                         value={inputs.x3}
                         onChange={handleChange}
                     />
                     <input
+                        name={"y3"}
                         type="password"
                         placeholder="Y coordinate"
                         value={inputs.y3}
