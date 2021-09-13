@@ -1,5 +1,5 @@
 import {initialize} from 'zokrates-js';
-import {ethers} from 'ethers';
+import {ethers,} from 'ethers';
 
 let zokratesProvider;
 let artifacts;
@@ -7,9 +7,8 @@ let artifacts;
 let verifierAbi = '[{"inputs":[{"components":[{"components":[{"internalType":"uint256","name":"X","type":"uint256"},{"internalType":"uint256","name":"Y","type":"uint256"}],"internalType":"struct Pairing.G1Point","name":"a","type":"tuple"},{"components":[{"internalType":"uint256[2]","name":"X","type":"uint256[2]"},{"internalType":"uint256[2]","name":"Y","type":"uint256[2]"}],"internalType":"struct Pairing.G2Point","name":"b","type":"tuple"},{"components":[{"internalType":"uint256","name":"X","type":"uint256"},{"internalType":"uint256","name":"Y","type":"uint256"}],"internalType":"struct Pairing.G1Point","name":"c","type":"tuple"}],"internalType":"struct Verifier.Proof","name":"proof","type":"tuple"},{"internalType":"uint256[1]","name":"input","type":"uint256[1]"}],"name":"verifyTx","outputs":[{"internalType":"bool","name":"r","type":"bool"}],"stateMutability":"view","type":"function"}]';
 
 async function initializeZokratesProvider() {
-    const zkp = await initialize();
 
-    zokratesProvider = zkp;
+    zokratesProvider = await initialize();
 
     const source = "import \"hashes/sha256/512bitPacked\" as sha256packed\n" +
         "\n" +
@@ -25,27 +24,29 @@ async function initializeZokratesProvider() {
         "    return (t[0] == 82813544787644065989771223340885025079 && t[1] == 180796112148717072687895248956071692603)\n" +
         "\n";
 
-    // compilation
     artifacts = zokratesProvider.compile(source);
-    console.log(artifacts.program.length)
+
 }
 
 async function unlockVault(inputs) {
 
-    const {witness, output} = zokratesProvider.computeWitness(artifacts, inputs);
+    const witness = zokratesProvider.computeWitness(artifacts, inputs);
+
     const keypair = zokratesProvider.setup(artifacts.program);
     const proof = zokratesProvider.generateProof(artifacts.program, witness, keypair.pk);
 
-    // todo implement server to do computation
+    console.log(proof);
 
-    // let provider = window.ethereum;
-    // console.log(provider)
-    // const verifierAdress = '0x1960639786bfCDDe620E61b77bDC24b20ab99973';
-    // let contract = new ethers.Contract(verifierAdress, verifierAbi, provider);
-    // console.log(contract)
-    // let t = await contract.verifyTx(proof.proof, proof.inputs);
-    //
-    // console.log(t);
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    console.log(provider);
+
+    const verifierAdress = '0x1960639786bfCDDe620E61b77bDC24b20ab99973';
+    let contract = new ethers.Contract(verifierAdress, verifierAbi, provider);
+    console.log(contract);
+
+    let t = await contract.verifyTx(proof.proof, proof.inputs);
+
+    console.log(t);
 }
 
 

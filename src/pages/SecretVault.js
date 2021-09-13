@@ -36,20 +36,7 @@ function SecretVault() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const t = {
-            x0: "1",
-            y0: "1028377",
-            x1: "2",
-            y1: "1028592",
-            x2: "3",
-            y2: "1029155",
-            x3: "4",
-            y3: "1030234"
-        }
-
-        unlockVault(Object.values(t));
-
+        unlockVault(Object.values(inputs));
     }
 
     if (vaultLoading) {
