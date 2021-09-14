@@ -21,14 +21,19 @@ async function initializeZokratesProvider() {
         "                  \n" +
         "    field[2] t = sha256packed([0, 0, 0, f_0])\n" +
         "        \n" +
-        "    return (t[0] == 82813544787644065989771223340885025079 && t[1] == 180796112148717072687895248956071692603)\n" +
-        "\n";
+        "    return (t[0] == 82813544787644065989771223340885025079 && t[1] == 180796112148717072687895248956071692603)";
 
     artifacts = zokratesProvider.compile(source);
 
 }
 
 async function unlockVault(inputs) {
+
+    let today = new Date();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    console.log(time);
+    console.log(inputs);
 
     const witness = zokratesProvider.computeWitness(artifacts, inputs);
 
@@ -38,6 +43,7 @@ async function unlockVault(inputs) {
     console.log(proof);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
     console.log(provider);
 
     const verifierAdress = '0x1960639786bfCDDe620E61b77bDC24b20ab99973';

@@ -36,6 +36,7 @@ function SecretVault() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         unlockVault(Object.values(inputs));
     }
 
